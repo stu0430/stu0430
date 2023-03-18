@@ -11,7 +11,7 @@
         <img src="https://img.shields.io/badge/Numpy-013243?style=flat-square&logo=Numpy&logoColor=white">&nbsp
         <img src="https://img.shields.io/badge/SciPy-%230C55A5.svg?style=flat-square&logo=scipy&logoColor=%white">&nbsp
         <img src="https://img.shields.io/badge/Pandas-150458?style=flat-square&logo=Pandas&logoColor=white">&nbsp
-   <!-- <img src="https://img.shields.io/badge/opencv-%23white.svg?style=flat-square&logo=opencv&logoColor=white">&nbsp -->
+    <!--<img src="https://img.shields.io/badge/opencv-%235C3EE8.svg?style=flat-square&logo=opencv&logoColor=white">&nbsp -->
         <img src="https://img.shields.io/badge/Scikit--learn-%23F7931E.svg?style=flat-square&logo=scikit-learn&logoColor=white">&nbsp
         <img src="https://img.shields.io/badge/Pytorch-EE4C2C?style=flat-square&logo=Pytorch&logoColor=white">&nbsp
         <img src="https://img.shields.io/badge/Flask-00000C?style=flat-square&logo=Flask&logoColor=white">&nbsp
