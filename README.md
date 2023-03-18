@@ -1,4 +1,4 @@
-<p align="center"><img src="https://capsule-render.vercel.app/api?type=slice&color=8cd7f7&height=200&section=header&text=SangGwon%20Lee&fontSize=70"</p>
+<p align="center"> <img src="https://capsule-render.vercel.app/api?type=slice&color=8cd7f7&height=200&section=header&text=SangGwon%20Lee&fontSize=70" </p>
 
 <!-- <<h2 align="center"> Hi there 👋 </h2> -->
 
@@ -31,3 +31,5 @@
 <p align="center"> 
     <a href="https://solved.ac/profile/stu0430"><img src="https://github-readme-solvedac-hyp3rflow.vercel.app/api/?handle=stu0430"></a>
 </p>
+
+<p align="center"> <img src="https://capsule-render.vercel.app/api?type=slice&color=8cd7f7&height=200&section=footer" </p>
