@@ -18,6 +18,40 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           USERNAME: ${{ github.repository_owner }}
+      - name: Post-process SVG (hide radar, pie, stats)
+        run: |
+          python3 - <<'EOF'
+          import re, glob
+
+          for path in glob.glob("profile-3d-contrib/profile-green*.svg"):
+              with open(path, "r", encoding="utf-8") as f:
+                  svg = f.read()
+
+              # 레이더 차트 숨기기: <g transform="translate(NNN, NNN)"> 중 pentagon(line x1="0") 포함 블록
+              svg = re.sub(
+                  r'(<g transform="translate\(\d+(?:\.\d+)?,\s*\d+(?:\.\d+)?\)"><line x1="0")',
+                  r'<g transform="translate(0,0)" style="display:none"><line x1="0"',
+                  svg
+              )
+
+              # 파이 차트 + 언어 범례 숨기기: <g transform="translate(40, 520)"> 블록
+              svg = re.sub(
+                  r'(<g transform="translate\(40,\s*520\)">)',
+                  r'<g transform="translate(40, 520)" style="display:none">',
+                  svg
+              )
+
+              # 하단 통계(contributions, 스타, 포크) 숨기기: contributions 텍스트 포함 마지막 <g> 블록
+              svg = re.sub(
+                  r'(<g><text[^>]*>\d+</text><text[^>]*>contributions</text>)',
+                  r'<g style="display:none"><text>0</text><text>contributions</text>',
+                  svg
+              )
+
+              with open(path, "w", encoding="utf-8") as f:
+                  f.write(svg)
+          EOF
+
       - name: Commit & Push
         run: |
           git config user.name github-actions
