@@ -41,26 +41,33 @@ jobs:
               #     svg
               # )
 
-              # 스타 아이콘 + 스타 수 숨기기
+              # 스타 아이콘 숨기기 (별 모양 path: M8 .25)
               svg = re.sub(
-                  r'<g transform="translate\(\d+(?:\.\d+)?,\s*\d+(?:\.\d+)?\),\s*scale\(2\)"><path fill-rule="evenodd" d="M8 \.25',
-                  r'<g style="display:none"><path fill-rule="evenodd" d="M8 .25',
+                  r'<g transform="([^"]*scale\(2\))"><path fill-rule="evenodd" d="M8 \.25',
+                  r'<g transform="\1" style="display:none"><path fill-rule="evenodd" d="M8 .25',
+                  svg
+              )
+              # 스타 수 숨기기 (스타 아이콘 뒤에 오는 숫자 텍스트)
+              svg = re.sub(
+                  r'(</g><text[^>]*>)(\d+)(<title>\d+</title></text><g[^>]*scale\(2\)"><path fill-rule="evenodd" d="M5)',
+                  r'\1<tspan style="display:none">\2</tspan>\3',
+                  svg
+              )
+              # 포크 아이콘 숨기기 (포크 모양 path: M5 3)
+              svg = re.sub(
+                  r'<g transform="([^"]*scale\(2\))"><path fill-rule="evenodd" d="M5 3',
+                  r'<g transform="\1" style="display:none"><path fill-rule="evenodd" d="M5 3',
+                  svg
+              )
+              # 포크 수 숨기기 (포크 아이콘 뒤에 오는 숫자 텍스트, title 포함/미포함 모두)
+              svg = re.sub(
+                  r'(</g><text[^>]*>)(\d+)(<title>\d+</title></text>)(<text[^>]*>\d{4}-)',
+                  r'\1<tspan style="display:none">\2</tspan>\3\4',
                   svg
               )
               svg = re.sub(
-                  r'(<text[^>]*>\d+<title>\d+</title></text><g transform="translate\(\d+(?:\.\d+)?,\s*\d+(?:\.\d+)?\),\s*scale\(2\)"><path fill-rule="evenodd" d="M5)',
-                  r'<text style="display:none">0<title>0</title></text><g style="display:none"><path fill-rule="evenodd" d="M5',
-                  svg
-              )
-              # 포크 아이콘 + 포크 수 숨기기
-              svg = re.sub(
-                  r'<g transform="translate\(\d+(?:\.\d+)?,\s*\d+(?:\.\d+)?\),\s*scale\(2\)"><path fill-rule="evenodd" d="M5 3',
-                  r'<g style="display:none"><path fill-rule="evenodd" d="M5 3',
-                  svg
-              )
-              svg = re.sub(
-                  r'<text[^>]*>\d+<title>\d+</title></text></g></g>',
-                  r'<text style="display:none">0<title>0</title></text></g></g>',
+                  r'(</g><text[^>]*>)(\d+)(</text>)(<text[^>]*>\d{4}-)',
+                  r'\1<tspan style="display:none">\2</tspan>\3\4',
                   svg
               )
 
