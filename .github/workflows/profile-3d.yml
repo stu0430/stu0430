@@ -27,24 +27,40 @@ jobs:
               with open(path, "r", encoding="utf-8") as f:
                   svg = f.read()
 
-              # 레이더 차트 숨기기: <g transform="translate(NNN, NNN)"> 중 pentagon(line x1="0") 포함 블록
+              # # 레이더 차트 숨기기: <g transform="translate(NNN, NNN)"> 중 pentagon(line x1="0") 포함 블록
+              # svg = re.sub(
+              #     r'(<g transform="translate\(\d+(?:\.\d+)?,\s*\d+(?:\.\d+)?\)"><line x1="0")',
+              #     r'<g transform="translate(0,0)" style="display:none"><line x1="0"',
+              #     svg
+              # )
+
+              # # 파이 차트 + 언어 범례 숨기기: <g transform="translate(40, 520)"> 블록
+              # svg = re.sub(
+              #     r'(<g transform="translate\(40,\s*520\)">)',
+              #     r'<g transform="translate(40, 520)" style="display:none">',
+              #     svg
+              # )
+
+              # 스타 아이콘 + 스타 수 숨기기
               svg = re.sub(
-                  r'(<g transform="translate\(\d+(?:\.\d+)?,\s*\d+(?:\.\d+)?\)"><line x1="0")',
-                  r'<g transform="translate(0,0)" style="display:none"><line x1="0"',
+                  r'<g transform="translate\(\d+(?:\.\d+)?,\s*\d+(?:\.\d+)?\),\s*scale\(2\)"><path fill-rule="evenodd" d="M8 \.25',
+                  r'<g style="display:none"><path fill-rule="evenodd" d="M8 .25',
                   svg
               )
-
-              # 파이 차트 + 언어 범례 숨기기: <g transform="translate(40, 520)"> 블록
               svg = re.sub(
-                  r'(<g transform="translate\(40,\s*520\)">)',
-                  r'<g transform="translate(40, 520)" style="display:none">',
+                  r'(<text[^>]*>\d+<title>\d+</title></text><g transform="translate\(\d+(?:\.\d+)?,\s*\d+(?:\.\d+)?\),\s*scale\(2\)"><path fill-rule="evenodd" d="M5)',
+                  r'<text style="display:none">0<title>0</title></text><g style="display:none"><path fill-rule="evenodd" d="M5',
                   svg
               )
-
-              # 하단 통계(contributions, 스타, 포크) 숨기기: contributions 텍스트 포함 마지막 <g> 블록
+              # 포크 아이콘 + 포크 수 숨기기
               svg = re.sub(
-                  r'(<g><text[^>]*>\d+</text><text[^>]*>contributions</text>)',
-                  r'<g style="display:none"><text>0</text><text>contributions</text>',
+                  r'<g transform="translate\(\d+(?:\.\d+)?,\s*\d+(?:\.\d+)?\),\s*scale\(2\)"><path fill-rule="evenodd" d="M5 3',
+                  r'<g style="display:none"><path fill-rule="evenodd" d="M5 3',
+                  svg
+              )
+              svg = re.sub(
+                  r'<text[^>]*>\d+<title>\d+</title></text></g></g>',
+                  r'<text style="display:none">0<title>0</title></text></g></g>',
                   svg
               )
 
