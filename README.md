@@ -28,7 +28,7 @@
 
 <p align="center">
   <b>🌐 Web, Database & Tools 🌐</b><br>
-  <img src="https://img.shields.io/badge/React-20232A?style=flat&logo=react&logoColor=61DAFB">
+  <img src="https://img.shields.io/badge/React-1DB8E0?style=flat&logo=react&logoColor=white">
   <img src="https://img.shields.io/badge/Spring_Boot-6DB33F?style=flat&logo=springboot&logoColor=white">
   <img src="https://img.shields.io/badge/Flask-00000C?style=flat&logo=Flask&logoColor=white">
   <img src="https://img.shields.io/badge/Selenium-%43B02A?style=flat&logo=selenium&logoColor=white">
